@@ -1,0 +1,20 @@
+services:
+  spark:
+    build: ./
+    restart: on-failure
+    container_name: spark-master 
+    hostname: spark-master
+    networks:
+      - appnet
+    volumes:
+      - ./app:/home/sparkuser/app
+      - ./logs:/home/sparkuser/logs 
+      - ./event_logs:/home/sparkuser/event_logs
+    ports:
+      - "4040:4040"
+      - "4041:4041"
+      - "18080:18080"
+      - "8888:8888"
+networks:
+  appnet:
+    driver: bridge
